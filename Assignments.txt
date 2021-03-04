@@ -8,3 +8,13 @@ In a file with name lab1-1.py write python code using the requests library that:
         (a) which software is the web server using?
         (b) does the web page store cookies on the client side, and if yes
         (c) for how long will the cookie be valid?
+
+
+In a file with name lab1-2.py write code which:
+    In http://ds.upatras.gr/ there is a (Greek) web form which given the Surname, E-mail or Phone of a UPatras employee, returns a page with contact information. Note that the form sends the request with the HTTP POST method.
+
+    asks the user to give the Surname of an employee, then makes a request to the ds.upatras.gr page and prints the e-mail address of the employee or a message if not found.
+    modify the code so that also the phone number(s) of the employee are printed.
+    modify the code so that if more than one employees are found, the data for all of them are printed.
+
+    Make sure that the names you request are written in Greek. You can try "Αβούρης" for example to get the contact details of a single person, and "Παπα" to get the details of all employees whose name starts with those four letters.
