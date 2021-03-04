@@ -25,15 +25,6 @@ def getURL():
         print("**************SERVER SOFTWARE*************")
         print(page.headers["SERVER"])
         print("*****************COOKIES*************************")
-        #https://requests.readthedocs.io/en/master/_modules/requests/cookies/
-        '''        
-        how_many_cookies=len(page.cookies.items())
-        print("HOST:", URL, "USES", how_many_cookies,"COOKIES")
-        if how_many_cookies>0:
-            print(page.cookies.items())
-            for cookie in page.cookies:
-                print(cookie.expires)
-        '''
         #Now lets do it the easy way, check the headers
         if "Set-Cookie" in page.headers:
             print("Cookie exists")
@@ -54,7 +45,7 @@ def getURL():
     
 def main():
     print("Introduction to WEB technologies Course")
-    print("Assignment 1")
+    print("Assignment 1-1")
     #get the URL 
     getURL()
 
