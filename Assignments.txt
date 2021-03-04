@@ -1,0 +1,10 @@
+02/03/2020
+1st Assignment
+Python requests library
+In a file with name lab1-1.py write python code using the requests library that:
+
+    asks for a URL and prints the HTTP response headers.
+    modify the code so it returns following information:
+        (a) which software is the web server using?
+        (b) does the web page store cookies on the client side, and if yes
+        (c) for how long will the cookie be valid?
