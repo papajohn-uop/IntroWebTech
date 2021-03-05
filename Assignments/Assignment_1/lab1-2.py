@@ -12,11 +12,6 @@ def getName():
             break
     return name
 
-    try:
-        page=requests.get(URL)
-    except Exception as ex:
-        print("Oooops. Something went wrong")
-        print(ex)
     
 def search(name:str):
     #USe the title method to capitalise only first letter
