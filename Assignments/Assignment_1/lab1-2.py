@@ -26,7 +26,6 @@ def search(name:str):
     try:
         myobj = {'surname': name.title()}
         page = requests.post(url, data = myobj)
-        #print(page.text)
         START_AT="</form>"
         STOP_AT="<!--Στην περίπτωση που"
         data=page.text
@@ -40,14 +39,23 @@ def search(name:str):
             #print(entry)
             #lets split each entry again to get specific data
             data_as_list=entry.split("<BR>")
-            for d in data_as_list:
-               print(d)
+            #for d in data_as_list:
+            #   print(d)
+            #If all entries had all data the following format would be valid:
             #Name is 1 entry, phone is 3rd entry, email is 4th
+            #But this is not the case so we need to check for actual info:
+            print("***************************************************")
             print("NAME->", data_as_list[0])
             #In case some entries do not have full data
-            if len(data_as_list)>3:
-                print("PHONE->", data_as_list[2])
-                print("EMAIL->", data_as_list[3])
+            for d in data_as_list:
+                if d.startswith("Email"):
+                    print("EMAIL-->",d)
+                if d.startswith("Τηλ:"):
+                    print("PHONΕ NUMBER-->",d)
+
+#            if len(data_as_list)>3:
+#                print("PHONE->", data_as_list[2])
+#                print("EMAIL->", data_as_list[3])
             
     except Exception as ex:
         print("Oooops. Something went wrong")
