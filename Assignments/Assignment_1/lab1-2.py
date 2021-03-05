@@ -36,27 +36,20 @@ def search(name:str):
         #remove last entry
         names_as_list.pop()
         for entry in names_as_list:
-            #print(entry)
             #lets split each entry again to get specific data
             data_as_list=entry.split("<BR>")
-            #for d in data_as_list:
-            #   print(d)
             #If all entries had all data the following format would be valid:
             #Name is 1 entry, phone is 3rd entry, email is 4th
             #But this is not the case so we need to check for actual info:
             print("***************************************************")
-            print("NAME->", data_as_list[0])
+            #We still have some <B> and </B> in our strings so we need to remove them
+            print("NAME->", data_as_list[0].replace("<B>","").replace("</B>",""))
             #In case some entries do not have full data
             for d in data_as_list:
                 if d.startswith("Email"):
-                    print("EMAIL-->",d)
+                    print("EMAIL-->",d.replace("<B>","").replace("</B>",""))
                 if d.startswith("Τηλ:"):
-                    print("PHONΕ NUMBER-->",d)
-
-#            if len(data_as_list)>3:
-#                print("PHONE->", data_as_list[2])
-#                print("EMAIL->", data_as_list[3])
-            
+                    print("PHONΕ NUMBER-->",d.replace("<B>","").replace("</B>",""))
     except Exception as ex:
         print("Oooops. Something went wrong")
         print(ex)
