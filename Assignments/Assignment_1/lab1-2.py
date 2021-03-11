@@ -19,8 +19,9 @@ def search(name:str):
     url="http://ds.upatras.gr/"
     #from firefox inspector the post sends a prameter named surname
     try:
-        myobj = {'surname': name.title()}
-        page = requests.post(url, data = myobj)
+        post_params = {'surname': name.title()}
+        page = requests.post(url, data = post_params)
+        #these values are hardcoded since they appear in the expected response text
         START_AT="</form>"
         STOP_AT="<!--Στην περίπτωση που"
         data=page.text
