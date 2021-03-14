@@ -19,18 +19,41 @@
   <label for="phoneNo">Στοιχεία επικοινωνίας:</label><br>
   <input type="phoneNo" id="phoneNo" name="phoneNo" placeholder="Τηλέφωνο">
   <input type="email" id="email" name="email" placeholder="Διεύθυνση μέιλ"><br><br>
-  <label for="birthday">Birthday:</label>
-  <input type="date" id="birthday" name="birthday"><br><br>
 
-
+ 
   <label for="edu_year">Έτος σπουδών:</label>
-  <input type="radio" id="A" name="a" value="Α">   <label for="a">Α</label>
-  <input type="radio" id="Β" name="Β" value="Β">   <label for="a">Β</label>
-  <input type="radio" id="C" name="C" value="Γ">   <label for="a">Γ</label>
-  <input type="radio" id="D" name="D" value="Δ">   <label for="a">Δ</label>
-  <input type="radio" id="E" name="E" value="Ε">   <label for="a">Ε</label>
+  <input type="radio" id="A" name="edu_year" value="Α">   <label for="a">Α</label>
+  <input type="radio" id="Β" name="edu_year" value="Β">   <label for="a">Β</label>
+  <input type="radio" id="C" name="edu_year" value="Γ">   <label for="a">Γ</label>
+  <input type="radio" id="D" name="edu_year" value="Δ">   <label for="a">Δ</label>
+  <input type="radio" id="E" name="edu_year" value="Ε">   <label for="a">Ε</label><br><br>
   
+  <label for="aritm_mitr">Αριθμός Μητρώου:</label><br>
+  <input type="number" id="aritm_mitr" name="aritm_mitr" placeholder="1050505"  min="1">
+
  </fieldset>
+
+ <fieldset>
+  <legend>Επιλέξτε πιστοποιητικο και τρόπο παραλαβής</legend>
+  <label for="fname">Είδος πιστοποιητικου:</label><br>
+  <select name="type" id="type">
+    <option value="grades">Φωτοτυπία Καρτέλας</option>
+    <!-- Those values were seleced in order to add some more option for selct --> 
+    <option value="vevaiosi">Βεβαίωση φοίτησης</option>
+    <option value="antig_ptyx">Αντιγραφο πτυχίου</option>
+    <option value="generic">Γενική αίτηση</option>
+  </select>
+  <br><br>
+  </fieldset>
+
+  <fieldset>
+    <legend>Παραλαβή Πιστοποιητικού</legend>
+    <input type="radio" id="paralavi" name="tropos_paralavis" value="Α">   <label for="paralavi">Παραλαβή από γραμματεία</label> <BR>
+    <input type="radio" id="apostoli" name="tropos_paralavis" value="Β">   <label for="apostoli">Αποστολή στην διεύθυνση οικίας</label> <BR><BR>
+    <label for="delivery_date">Ημερομηνία Παραλαβής:</label><BR>
+    <input type="date" id="birthday" name="birthday"><br><br>
+</fieldset>
+
 </form>
   <input type="submit" value="Submit">
 </body>
