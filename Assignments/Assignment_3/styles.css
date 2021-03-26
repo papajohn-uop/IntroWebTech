@@ -1,0 +1,105 @@
+/* Μην αλλάξετε τα παρακάτω: */
+
+html {
+  font-size: 10px;
+}
+
+body {
+  background-color: #fff;
+  color: #333;
+  margin: 0;
+  font: 1.8em / 1.8 Arial, Helvetica, sans-serif;
+}
+
+.logo {
+  font-size: 2em;
+  padding: 50px 20px;
+  margin: 0 auto;
+  max-width: 980px;
+  
+}
+
+.grid {
+  margin: 0 auto;
+  padding: 0 20px;
+  max-width: 980px;
+}
+
+nav {
+  background-color: #000;
+  padding: .5em;
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+}
+
+nav a {
+  color: #fff;
+  padding: .5em 1em;
+}
+
+.photos {
+  margin: 0;
+  padding: 0;
+}
+
+
+/* Απαντήστε από εδώ και κάτω: */
+
+
+/* Ερώτηση 1 */
+
+nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch; 
+  justify-content: space-between;
+}
+/* Ερώτηση 2 */
+nav {
+  position: sticky;
+  top: 0;
+
+}
+
+/* Ερώτηση 3 */
+
+.feature  {
+  height: auto; 
+  width: 50%; 
+  min-width: 200; 
+  min-height: auto;
+  float: left;
+  padding: 10px
+}
+/* Ερώτηση 4 */
+.aside ul {
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.aside li {
+  width: 50%;
+}
+
+/* Ερώτηση 5 */
+.grid {
+  display: grid;
+  grid-template-columns: 66% 33%;
+  grid-gap: 10px;
+  padding: 10px;
+}
+
+/* Ερώτηση 6 */
+article {
+  font-size: 120%;
+}
