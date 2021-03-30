@@ -60,3 +60,13 @@ newItem.addEventListener("keyup", function(event) {
       }
      
     };
+
+
+
+  //Double click
+  toDoList.ondblclick = function(event) {
+   
+      console.log("Double Click. Should delete")
+      var target = event.target;
+      toDoList.removeChild(target)
+  };
