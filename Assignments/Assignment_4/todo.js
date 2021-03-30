@@ -43,9 +43,7 @@ newItem.addEventListener("keyup", function(event) {
   });
 
   //Strikethrough
-  
   toDoList.onclick = function(event) {
       var target = event.target;
       target.style.setProperty("text-decoration", "line-through");
-      log.console(target.style.)
     };
