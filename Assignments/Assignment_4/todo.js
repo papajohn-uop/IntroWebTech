@@ -42,8 +42,21 @@ newItem.addEventListener("keyup", function(event) {
 
   });
 
+  var click_count= 0;
   //Strikethrough
   toDoList.onclick = function(event) {
+      click_count++;
+      console.log(click_count)
       var target = event.target;
-      target.style.setProperty("text-decoration", "line-through");
+      if (click_count % 2==1)
+      {
+        console.log("odd")
+        target.style.setProperty("text-decoration", "line-through");
+      }
+      else
+      {
+        console.log("even")
+        target.style.setProperty("text-decoration", "none");
+      }
+     
     };
