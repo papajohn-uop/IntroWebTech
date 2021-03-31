@@ -33,7 +33,7 @@ newItem.addEventListener("keyup", function(event) {
         var textnode=document.createTextNode(val);
         tmpNode.appendChild(textnode);
         toDoList.appendChild(tmpNode);
-
+        
         //Iem added reset text field
         newItem.value=""  
 
@@ -48,15 +48,22 @@ newItem.addEventListener("keyup", function(event) {
       click_count++;
       console.log(click_count)
       var target = event.target;
+      console.log(target.outerHTML);
+
       if (click_count % 2==1)
       {
         console.log("odd")
-        target.style.setProperty("text-decoration", "line-through");
+        console.log(target.classList)
+        target.classList.add("completed")
+        // target.style.textDecoration = "line-through";
+     //   target.style.setProperty("text-decoration", "line-through");
+       // target.style.classname="li.completed"
       }
       else
       {
         console.log("even")
-        target.style.setProperty("text-decoration", "none");
+        target.classList.remove("completed")
+        //  target.style.setProperty("text-decoration", "none");
       }
      
     };
