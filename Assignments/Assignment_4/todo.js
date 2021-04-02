@@ -17,12 +17,13 @@ btnClear.addEventListener("click", function() {
         toDoList.removeChild( toDoList.firstChild );
       }
 
-      //clear the text field input just in case
+    //clear the text field input just in case
     newItem.value=""  
 });
 
 //Adding an event listener:  for text input to react on enter 
 newItem.addEventListener("keyup", function(event) {
+    //13 is the code for Enter key
     if (event.keyCode === 13) {
         console.log("Το κουμπί ENTER πατήθηκε");
         var val = newItem.value;
@@ -34,7 +35,7 @@ newItem.addEventListener("keyup", function(event) {
         tmpNode.appendChild(textnode);
         toDoList.appendChild(tmpNode);
         
-        //Iem added reset text field
+        //Item added, reset text field
         newItem.value=""  
 
 
@@ -42,27 +43,30 @@ newItem.addEventListener("keyup", function(event) {
 
   });
 
-  var click_count= 0;
   //Strikethrough
+  var click_count= 0;
+  //Keep above variable to check how many times the item has been clicked
   toDoList.onclick = function(event) {
       click_count++;
       console.log(click_count)
       var target = event.target;
-      console.log(target.outerHTML);
-
+      
       if (click_count % 2==1)
       {
+        //On odd clicks strikethrough
         console.log("odd")
-        console.log(target.classList)
+        //On odd click add  completed ccs style. li style will be overriden
         target.classList.add("completed")
-        // target.style.textDecoration = "line-through";
+        //Previous implementation with setProperty
      //   target.style.setProperty("text-decoration", "line-through");
-       // target.style.classname="li.completed"
       }
       else
       {
+        //On even clicks normal
         console.log("even")
+        //On evenclick remove  completed ccs style. li style will be used
         target.classList.remove("completed")
+        //Previous implementation with setProperty
         //  target.style.setProperty("text-decoration", "none");
       }
      
