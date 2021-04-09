@@ -49,5 +49,16 @@ function runOnLoad(e) {
   console.log("PAPA")
   shuffled=shuffleArray(vouna)
   console.log(shuffled)
+  //this gets ALL the divs with this class
+  var x = document.getElementsByClassName("mikrografies");
+  console.log(x)
 
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    var img_elem = document.createElement("img");
+    src=shuffled[i][1]
+    img_elem.src =src;
+    //Just use the only div with class mikrografies which is the first entry (index 0) o
+    x[0].appendChild(img_elem);
+    console.log(shuffled[i][1])
+  }
 }

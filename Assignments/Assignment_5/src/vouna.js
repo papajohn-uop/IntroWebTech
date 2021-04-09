@@ -64,5 +64,3 @@ const vouna = [
         './img/Erymanthos_kataraktis.jpg'
     ]
 ]
-
-export { vouna}
