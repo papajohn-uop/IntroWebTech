@@ -54,6 +54,8 @@ function runOnLoad(e) {
   //this gets ALL the divs with this class
   var mikrografies = document.getElementsByClassName("mikrografies");
   var main_panel = document.getElementsByClassName("panel-main");
+  var perigrafi_panel = document.getElementsByClassName("perigrafi");
+  
   console.log(mikrografies)
   console.log(main_panel)
    
@@ -74,4 +76,14 @@ function runOnLoad(e) {
   //Just use the only div with class mikrografies which is the first entry (index 0) o
   main_panel[0].appendChild(first_img_elem);
   console.log(shuffled[0][1])
+
+  //shwow first image description on descritpion panel
+  desc=shuffled[0][0]
+  var first_img_desc = document.createTextNode(desc);
+  
+  //Just use the only div with class mikrografies which is the first entry (index 0) o
+  perigrafi_panel[0].appendChild(first_img_desc);
+  console.log(shuffled[0][1])
+
+
 }
