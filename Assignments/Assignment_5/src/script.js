@@ -24,7 +24,35 @@ const thumbs = document.querySelectorAll(".mikrografies img");
 // - displays the just clicked image in the area panel-main 
 // - makes sure that only the just clicked thumbnail has opacity 50%. 
 
+//KEep the shuffled images
+var shuffled
+
+//Keep the previosly clikced image
+var prev_target
 function imgActivate(e) {
+  //opaque current
+  e.target.classList.add("activeThumb")    
+  if (typeof prev_target !== 'undefined')// if we have already done this once
+    //deopaque previous image
+    prev_target.classList.remove("activeThumb")    
+
+    //now add the clicked image to main panel  
+
+    var main_panel = document.getElementsByClassName("panel-main");
+    //bit og a hack. in this case the image is the lastchid of div so we use that directly
+    new_src=e.target.getAttribute('src')
+    main_panel[0].lastChild.src=new_src
+    //lets update description as well
+    var perigrafi_panel = document.getElementsByClassName("perigrafi");
+    perigrafi_panel[0].textContent="PAPA"
+    for (var i=0, len=shuffled.length, img; i<len; i++) {
+      img = shuffled[i][1];
+      //If img matches select new description
+      if (img==new_src)
+        perigrafi_panel[0].textContent=shuffled[i][0]
+    }
+
+    prev_target=e.target 
 
 }
 
@@ -46,9 +74,9 @@ function shuffleArray(array) {
 
 
 function runOnLoad(e) {
-  console.log("PAPA")
+  console.log("Papajohn")
   shuffled=shuffleArray(vouna)
-  console.log(shuffled)
+  //console.log(shuffled)
   
   
   //this gets ALL the divs with this class
@@ -56,12 +84,12 @@ function runOnLoad(e) {
   var main_panel = document.getElementsByClassName("panel-main");
   var perigrafi_panel = document.getElementsByClassName("perigrafi");
   
-  console.log(mikrografies)
-  console.log(main_panel)
+  //console.log(mikrografies)
+ // console.log(main_panel)
    
   //for (let i = shuffled.length - 1; i > 0; i--) {
     for (let i = 0; i<shuffled.length - 1;  i++) {
-      var img_elem = document.createElement("img");
+    var img_elem = document.createElement("img");
     src=shuffled[i][1]
     img_elem.src =src;
     //Just use the only div with class mikrografies which is the first entry (index 0) o
@@ -75,7 +103,7 @@ function runOnLoad(e) {
   first_img_elem.src =src;
   //Just use the only div with class mikrografies which is the first entry (index 0) o
   main_panel[0].appendChild(first_img_elem);
-  console.log(shuffled[0][1])
+  //console.log(shuffled[0][1])
 
   //shwow first image description on descritpion panel
   desc=shuffled[0][0]
@@ -83,7 +111,17 @@ function runOnLoad(e) {
   
   //Just use the only div with class mikrografies which is the first entry (index 0) o
   perigrafi_panel[0].appendChild(first_img_desc);
-  console.log(shuffled[0][1])
+  //console.log(shuffled[0][1])
+
+
+  var images = document.getElementsByTagName("img");
+
+  for (var i=0, len=images.length, img; i<len; i++) {
+    img = images[i];
+    img.addEventListener("click", imgActivate );
+
+    //console.log(img)
+  }
 
 
 }
