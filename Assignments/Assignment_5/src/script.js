@@ -42,14 +42,14 @@ function imgActivate(e) {
   {
     prev_target=e.target
   }  
-  //opaque current
-  e.target.classList.add("activeThumb")    
+
   //deopaque previous image
   prev_target.classList.remove("activeThumb")    
-  //now add the clicked image to main panel  
+  //opaque current
+  e.target.classList.add("activeThumb")    
+    //now add the clicked image to main panel  
   //bit og a hack. in this case the image is the lastchid of div so we use that directly
   new_src=e.target.getAttribute('src')
-  console.log(new_src)
   main_panel[0].lastChild.src=new_src
   //lets update description as well
   perigrafi_panel[0].textContent="PAPA"
@@ -57,7 +57,10 @@ function imgActivate(e) {
     img = shuffled[i][1];
     //If img matches select new description
     if (img==new_src)
+    {
       perigrafi_panel[0].textContent=shuffled[i][0]
+      main_panel[0].lastChild.title=shuffled[i][0]
+    }
   }
 
   prev_target=e.target 
@@ -90,25 +93,22 @@ function runOnLoad(e) {
     img_elem.src =src;
     //Just use the only div with class mikrografies which is the first entry (index 0) o
     mikrografies_panel[0].appendChild(img_elem);
-    //console.log(shuffled[i][1])
   }
 
   //shwow first image on main panel
   var first_img_elem = document.createElement("img");
   src=shuffled[0][1]
   first_img_elem.src =src;
+  first_img_elem.title =shuffled[0][0];
   //Just use the only div with class mikrografies which is the first entry (index 0) o
   main_panel[0].appendChild(first_img_elem);
-  //console.log(shuffled[0][1])
-
+  main_panel[0].lastChild.title=shuffled[0][0]
   //shwow first image description on descritpion panel
   desc=shuffled[0][0]
   var first_img_desc = document.createTextNode(desc);
   
   //Just use the only div with class mikrografies which is the first entry (index 0) o
   perigrafi_panel[0].appendChild(first_img_desc);
-  //console.log(shuffled[0][1])
-
 
   var images = document.getElementsByTagName("img");
 
@@ -116,7 +116,6 @@ function runOnLoad(e) {
     img = images[i];
     img.addEventListener("click", imgActivate );
     img.title=shuffled[i][0] // add title attribute as tooltip
-    //console.log(img)
   }
 
 
@@ -124,21 +123,18 @@ function runOnLoad(e) {
 }
 
 
+function reset_opaque()
+{
+  //check if something has been clicked
+  //and if yes deaopaque it
+  var x = document.getElementsByClassName("activeThumb");
+  if(x.length>0)
+    x[0].classList.remove("activeThumb")  
+}
 
-function new_photo_fuction(e) {
-  console.log("New Photo")
-  //Get all children of mirkografeis panel
-  var mikrografies = mikrografies_panel[0].children;
-  console.log(mikrografies)
-  let randomIndex = Math.floor(Math.random() * mikrografies_panel[0].childElementCount);
-  //Tranfomr htmlcollection to array( https://stackoverflow.com/questions/222841/most-efficient-way-to-convert-an-htmlcollection-to-an-array )
-  var arr = Array.prototype.slice.call( mikrografies )
-
-  console.log( Math.floor(Math.random() * mikrografies_panel[0].childElementCount));
-  //just like in activate
-  //bit og a hack. in this case the image is the lastchid of div so we use that directly
-  new_src=arr[randomIndex].getAttribute("src")
-  console.log(new_src)
+//get a new src and change phot in  main panel, description and hover tooltip
+function update_photo(new_src)
+{
   main_panel[0].lastChild.src=new_src
   //lets update description as well
   perigrafi_panel[0].textContent="PAPA"
@@ -147,9 +143,26 @@ function new_photo_fuction(e) {
     img = shuffled[i][1];
     //If img matches select new description
     if (img==new_src)
+    {
       perigrafi_panel[0].textContent=shuffled[i][0]
+      main_panel[0].lastChild.title=shuffled[i][0]
+    }
   }
+}
 
+function new_photo_fuction(e) {
+  reset_opaque()
+  //Get all children of mirkografeis panel
+  var mikrografies = mikrografies_panel[0].children;
+  let randomIndex = Math.floor(Math.random() * mikrografies_panel[0].childElementCount);
+  //Tranfomr htmlcollection to array( https://stackoverflow.com/questions/222841/most-efficient-way-to-convert-an-htmlcollection-to-an-array )
+  var arr = Array.prototype.slice.call( mikrografies )
+
+  //just like in activate
+  //bit og a hack. in this case the image is the lastchid of div so we use that directly
+  new_src=arr[randomIndex].getAttribute("src")
+
+  update_photo(new_src)
 
 }
 
@@ -157,16 +170,12 @@ function new_photo_fuction(e) {
 
 
 function prev_photo_fuction(e) {
-  console.log("Prev Photo")
-
+  reset_opaque()
   var index 
   for (var i=0, len=shuffled.length, img; i<len; i++) 
   {
-
-  if  (shuffled[i][1]==main_panel[0].lastChild.getAttribute("src"))
-  {
-    index=i
-  }
+    if  (shuffled[i][1]==main_panel[0].lastChild.getAttribute("src"))
+      index=i
   }
   if (index==0)
   {
@@ -177,48 +186,24 @@ function prev_photo_fuction(e) {
   //just like in activate
 
   new_src=shuffled[index][1]
-  console.log(new_src)
-  main_panel[0].lastChild.src=new_src
-  //lets update description as well
-  perigrafi_panel[0].textContent="PAPA"
-  for (var i=0, len=shuffled.length, img; i<len; i++) 
-  {
-    img = shuffled[i][1];
-    //If img matches select new description
-    if (img==new_src)
-      perigrafi_panel[0].textContent=shuffled[i][0]
-  }
+  update_photo(new_src)
 
 }
 
 function next_photo_fuction(e) {
+  reset_opaque()
   var index 
   for (var i=0, len=shuffled.length, img; i<len; i++) 
   {
-
     if  (shuffled[i][1]==main_panel[0].lastChild.getAttribute("src"))
-    {
         index=i
-    }
   }
   if (index==shuffled.length-1)
-  {
       index=0
-  }
   else 
     index=index+1
   //just like in activate
   new_src=shuffled[index][1]
-  main_panel[0].lastChild.src=new_src
-  //lets update description as well
-  perigrafi_panel[0].textContent="PAPA"
-  for (var i=0, len=shuffled.length, img; i<len; i++) 
-  {
-    img = shuffled[i][1];
-    //If img matches select new description
-    if (img==new_src)
-      perigrafi_panel[0].textContent=shuffled[i][0]
-  }
-
+  update_photo(new_src)
 
 }
