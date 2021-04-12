@@ -22,13 +22,14 @@ var game_area_div = document.querySelector("#gameArea")
 //show the first circle
 appearAfterDelay();
 
+
 //επιστρέφει ένα τυχαίο χρώμα
 //return a random color
 function getRandomColor() {
     let color = '#';
     //κάντε τις απαραίτητες αλλαγές ώστε η getRandomColor() να επιστρέφει ένα τυχαίο χρώμα, αντί για το κόκκινο που επιστρέφει τώρα
     //make the appropriate changes such so that it returns a random color
-    color = color + "FF0000";
+    color = color + Math.floor(Math.random()*16777215).toString(16);
     return color;
 }
 //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
@@ -46,14 +47,27 @@ function makeShapeAppear() {
     //και να είναι πάντα μέσα στο πλαίσιο
     //Instead of fixed values, for top, left and width use random values (that are sensible), so that the circles
     //always appear in a random position and with a random size (not huge, not tiny) and always in the frame
-    let top = 200;
-    let left = 200;
-    let width = 50;
-
-    var circle_div = document.createElement("DIV");
+    
+    //for size we define min =50 max150
+    let width = getRandomIntInclusive(50,150);;
+    //to make sure everything is inside : we select x,y from the total size minus the circle size
+    let top = getRandomIntInclusive(width,game_area_div.clientHeight-width);
+    let left = getRandomIntInclusive(width,game_area_div.clientWidth-width);
+    
+    
+    var circle_div = document.createElement("div");
     circle_div.id="shape"
+    circle_div.style.position = "absolute";
+    circle_div.style.top = top;
+    circle_div.style.left = left;
+    circle_div.style.height = width;
+    circle_div.style.width = width;
+    circle_div.style.backgroundColor = getRandomColor();
+    console.log(circle_div)
     game_area_div.appendChild(circle_div);
 
+  
+    
    // document.querySelector("#shape").style.display = "block";
 
 }
@@ -68,7 +82,9 @@ function appearAfterDelay() {
         console.log(rand_Delay)
         setTimeout(makeShapeAppear, rand_Delay);
     }
-        
+
+    console.log(game_area_div.clientWidth)
+    console.log(game_area_div.clientHeight)
     
 }
 
