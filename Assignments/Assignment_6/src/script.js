@@ -14,6 +14,10 @@ let attempts = 0;
 //max attempts
 const maxAttempts = 10;
 
+
+//The game area div
+var game_area_div = document.querySelector("#gameArea")
+
 //εμφάνισε τον πρώτο κύκλο
 //show the first circle
 appearAfterDelay();
@@ -46,7 +50,11 @@ function makeShapeAppear() {
     let left = 200;
     let width = 50;
 
-    document.querySelector("#shape").style.display = "block";
+    var circle_div = document.createElement("DIV");
+    circle_div.id="shape"
+    game_area_div.appendChild(circle_div);
+
+   // document.querySelector("#shape").style.display = "block";
 
 }
 
@@ -54,7 +62,14 @@ function makeShapeAppear() {
 //waits 0 to 2 sec before showing the circle
 function appearAfterDelay() {
     //προσθέστε κώδικα ώστε το σχήμα να εμφανίζεται μετά από τυχαίο διάστημα 0-2 δευτερολέπτων
-    makeShapeAppear();
+    for (var i=0; i<maxAttempts; i++) 
+    { 
+        rand_Delay=Math.random() * 2000 //to get up to 2000 msecs
+        console.log(rand_Delay)
+        setTimeout(makeShapeAppear, rand_Delay);
+    }
+        
+    
 }
 
 //όταν ο παίχτης κάνει κλικ σε ένα σχήμα πρέπει να γίνουν μια σειρά από πράγματα...
@@ -62,3 +77,7 @@ function appearAfterDelay() {
 document.querySelector("#shape").onclick = function () {
 
 }
+
+
+
+  
