@@ -20,8 +20,13 @@ var game_area_div = document.querySelector("#gameArea")
 
 //εμφάνισε τον πρώτο κύκλο
 //show the first circle
-appearAfterDelay();
-
+function newGame(){
+  if (attempts==0)//So that pressing new game while already paying does nothing
+    appearAfterDelay();
+    //Reset time labels
+    document.getElementById('timeTaken').innerHTML = 'ms'
+    document.getElementById('totalTime').innerHTML = 'ms'
+}
 
 //επιστρέφει ένα τυχαίο χρώμα
 //return a random color
@@ -68,7 +73,7 @@ function makeShapeAppear() {
     circle_div.addEventListener("click", doSmth );
    // console.log(circle_div)
     game_area_div.appendChild(circle_div);
-
+    start = new Date().getTime();
   
     
    // document.querySelector("#shape").style.display = "block";
@@ -85,7 +90,7 @@ function appearAfterDelay() {
        // console.log(rand_Delay)
         setTimeout(makeShapeAppear, rand_Delay);
         //time that the circl has appeared
-        start = new Date().getTime();
+        
     }
 
   //  console.log(game_area_div.clientWidth)
@@ -127,6 +132,8 @@ function doSmth(e) {
   console.log("TOTAL TIME")
   console.log(totalTime)
   alert('TOTAL TIME--> ' + totalTime);
+  attempts=0
+  totalTime=0
  }
    else
  appearAfterDelay()
