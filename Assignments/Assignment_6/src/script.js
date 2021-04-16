@@ -29,9 +29,11 @@ function getRandomColor() {
     let color = '#';
     //κάντε τις απαραίτητες αλλαγές ώστε η getRandomColor() να επιστρέφει ένα τυχαίο χρώμα, αντί για το κόκκινο που επιστρέφει τώρα
     //make the appropriate changes such so that it returns a random color
-    color = color + Math.floor(Math.random()*16777215).toString(16);
-    return color;
+   color = color + Math.floor(Math.random()*16777215).toString(16);
+    //  color = color + Math.floor(Math.random()*5000000).toString(16);
+   return color;
 }
+
 //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
 function getRandomIntInclusive(min, max) {
     min = Math.ceil(min);
@@ -105,9 +107,13 @@ function doSmth(e) {
  //Count Time
  finish = new Date().getTime();
  circle_time=finish-start;
+ //Show time for each circle on html page
+ document.getElementById('timeTaken').innerHTML = circle_time+'ms'
  //console.log(circle_time)
  //Keep total time
  totalTime+=circle_time
+ //Show time for each circle on html page
+ document.getElementById('totalTime').innerHTML = totalTime+'ms'
  //Count circles so far
  attempts++
  //console.log(attempts)
