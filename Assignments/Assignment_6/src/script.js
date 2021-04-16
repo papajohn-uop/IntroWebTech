@@ -63,7 +63,8 @@ function makeShapeAppear() {
     circle_div.style.height = width;
     circle_div.style.width = width;
     circle_div.style.backgroundColor = getRandomColor();
-    console.log(circle_div)
+    circle_div.addEventListener("click", doSmth );
+   // console.log(circle_div)
     game_area_div.appendChild(circle_div);
 
   
@@ -76,24 +77,53 @@ function makeShapeAppear() {
 //waits 0 to 2 sec before showing the circle
 function appearAfterDelay() {
     //προσθέστε κώδικα ώστε το σχήμα να εμφανίζεται μετά από τυχαίο διάστημα 0-2 δευτερολέπτων
-    for (var i=0; i<maxAttempts; i++) 
+  //  for (var i=0; i<maxAttempts; i++) 
     { 
         rand_Delay=Math.random() * 2000 //to get up to 2000 msecs
-        console.log(rand_Delay)
+       // console.log(rand_Delay)
         setTimeout(makeShapeAppear, rand_Delay);
+        //time that the circl has appeared
+        start = new Date().getTime();
     }
 
-    console.log(game_area_div.clientWidth)
-    console.log(game_area_div.clientHeight)
-    
+  //  console.log(game_area_div.clientWidth)
+  //  console.log(game_area_div.clientHeight)
+
 }
 
 //όταν ο παίχτης κάνει κλικ σε ένα σχήμα πρέπει να γίνουν μια σειρά από πράγματα...
 //when the player clicks the shape ...
 document.querySelector("#shape").onclick = function () {
+    console.log("DS")
 
 }
 
-
+//όταν ο παίχτης κάνει κλικ σε ένα σχήμα πρέπει να γίνουν μια σειρά από πράγματα...
+//when the player clicks the shape ...
+function doSmth(e) {
+ //console.log(e)
+ //Count Time
+ finish = new Date().getTime();
+ circle_time=finish-start;
+ //console.log(circle_time)
+ //Keep total time
+ totalTime+=circle_time
+ //Count circles so far
+ attempts++
+ //console.log(attempts)
+ //Disappear
+ var myobj = document.getElementById("shape");
+ myobj.remove();
+ //Show next circle
+ if (attempts==10)
+ {
+  console.log("GAME OVER")
+  console.log("TOTAL TIME")
+  console.log(totalTime)
+  alert('TOTAL TIME--> ' + totalTime);
+ }
+   else
+ appearAfterDelay()
+}
 
   
