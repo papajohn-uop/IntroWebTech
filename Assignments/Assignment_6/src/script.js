@@ -22,11 +22,12 @@ var game_area_div = document.querySelector("#gameArea")
 //show the first circle
 function newGame(){
   if (attempts==0)//So that pressing new game while already paying does nothing
-    {appearAfterDelay();
+  {
+    appearAfterDelay();
     //Reset time labels
     document.getElementById('timeTaken').innerHTML = 'ms'
     document.getElementById('totalTime').innerHTML = 'ms'
-    }
+  }
 }
 
 //επιστρέφει ένα τυχαίο χρώμα
@@ -35,15 +36,14 @@ function getRandomColor() {
     let color = '#';
     //κάντε τις απαραίτητες αλλαγές ώστε η getRandomColor() να επιστρέφει ένα τυχαίο χρώμα, αντί για το κόκκινο που επιστρέφει τώρα
     //make the appropriate changes such so that it returns a random color
-   //Typical way to select a a color with random number
+    //Typical way to select a a color with random number
     //color = color + Math.floor(Math.random()*16777215).toString(16);
-   //USe a hex number to select the color
+    //USe a hex number to select the color
     //color = color + Math.floor(Math.random()*0xFFFFFF).toString(16);
-   //QnD way to make sure that the color is visible. By limiting each hex color up to 0xAA
-   //we make sure that not much "white" element of colors is present, therefore darker colors will prevail
+    //QnD way to make sure that the color is visible. By limiting each hex color up to 0xAA
+    //we make sure that not much "white" element of colors is present, therefore darker colors will prevail
     color = color + Math.floor(Math.random()*0xFFFFFF).toString(16);
-   //  color = color + Math.floor(Math.random()*5000000).toString(16);
-   return color;
+    return color;
 }
 
 //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
@@ -68,7 +68,7 @@ function makeShapeAppear() {
     let top = getRandomIntInclusive(width,game_area_div.clientHeight-width);
     let left = getRandomIntInclusive(width,game_area_div.clientWidth-width);
     
-    
+    //Add the cicrle and the eventListener
     var circle_div = document.createElement("div");
     circle_div.id="shape"
     circle_div.style.position = "absolute";
@@ -78,8 +78,8 @@ function makeShapeAppear() {
     circle_div.style.width = width;
     circle_div.style.backgroundColor = getRandomColor();
     circle_div.addEventListener("click", doSmth );
-   // console.log(circle_div)
     game_area_div.appendChild(circle_div);
+    //Start counting time for each circle
     start = new Date().getTime();
   
     
@@ -91,59 +91,45 @@ function makeShapeAppear() {
 //waits 0 to 2 sec before showing the circle
 function appearAfterDelay() {
     //προσθέστε κώδικα ώστε το σχήμα να εμφανίζεται μετά από τυχαίο διάστημα 0-2 δευτερολέπτων
-  //  for (var i=0; i<maxAttempts; i++) 
-    { 
-        rand_Delay=Math.random() * 2000 //to get up to 2000 msecs
-       // console.log(rand_Delay)
-        setTimeout(makeShapeAppear, rand_Delay);
-        //time that the circl has appeared
-        
-    }
-
-  //  console.log(game_area_div.clientWidth)
-  //  console.log(game_area_div.clientHeight)
-
+    rand_Delay=Math.random() * 2000 //to get up to 2000 msecs
+    setTimeout(makeShapeAppear, rand_Delay);
 }
 
 //όταν ο παίχτης κάνει κλικ σε ένα σχήμα πρέπει να γίνουν μια σειρά από πράγματα...
 //when the player clicks the shape ...
 document.querySelector("#shape").onclick = function () {
     console.log("DS")
-
 }
 
 //όταν ο παίχτης κάνει κλικ σε ένα σχήμα πρέπει να γίνουν μια σειρά από πράγματα...
 //when the player clicks the shape ...
 function doSmth(e) {
- //console.log(e)
- //Count Time
- finish = new Date().getTime();
- circle_time=finish-start;
- //Show time for each circle on html page
- document.getElementById('timeTaken').innerHTML = circle_time+'ms'
- //console.log(circle_time)
- //Keep total time
- totalTime+=circle_time
- //Show time for each circle on html page
- document.getElementById('totalTime').innerHTML = totalTime+'ms'
- //Count circles so far
- attempts++
- //console.log(attempts)
- //Disappear
- var myobj = document.getElementById("shape");
- myobj.remove();
- //Show next circle
- if (attempts==10)
- {
-  console.log("GAME OVER")
-  console.log("TOTAL TIME")
-  console.log(totalTime)
-  alert('TOTAL TIME--> ' + totalTime);
-  attempts=0 //So that a new game can start
-  totalTime=0
- }
-   else
- appearAfterDelay()
+  finish = new Date().getTime();
+  circle_time=finish-start;
+  //Show time for each circle on html page
+  document.getElementById('timeTaken').innerHTML = circle_time+'ms'
+  //Keep total time
+  totalTime+=circle_time
+  //Show time for each circle on html page
+  document.getElementById('totalTime').innerHTML = totalTime+'ms'
+  //Count circles so far
+  attempts++
+  //Circle shoul dissappear
+  var myobj = document.getElementById("shape");
+  myobj.remove();
+  //Show next circle
+  if (attempts==10)
+  {
+    //Game over
+    console.log("GAME OVER")
+    console.log("TOTAL TIME")
+    console.log(totalTime)
+    alert('TOTAL TIME--> ' + totalTime);
+    attempts=0 //So that a new game can start
+    totalTime=0
+  }
+  else   //Show next circle
+    appearAfterDelay()
 }
 
   
