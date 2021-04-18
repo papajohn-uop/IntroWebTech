@@ -20,9 +20,12 @@ var game_area_div = document.querySelector("#gameArea")
 
 //εμφάνισε τον πρώτο κύκλο
 //show the first circle
+//Create a flag that a gmame has started
+game_is_on=false
 function newGame(){
-  if (attempts==0)//So that pressing new game while already paying does nothing
+  if (game_is_on==false)//So that pressing new game while already paying does nothing
   {
+    game_is_on=true
     appearAfterDelay();
     //Reset time labels
     document.getElementById('timeTaken').innerHTML = 'ms'
@@ -124,8 +127,10 @@ function doSmth(e) {
     console.log("GAME OVER")
     console.log("TOTAL TIME")
     console.log(totalTime)
-    alert('TOTAL TIME--> ' + totalTime);
-    attempts=0 //So that a new game can start
+    alert('TOTAL TIME--> ' + totalTime + "ms");
+    //So that a new game can start
+    game_is_on=false
+    attempts=0 
     totalTime=0
   }
   else   //Show next circle
