@@ -35,8 +35,14 @@ function getRandomColor() {
     let color = '#';
     //κάντε τις απαραίτητες αλλαγές ώστε η getRandomColor() να επιστρέφει ένα τυχαίο χρώμα, αντί για το κόκκινο που επιστρέφει τώρα
     //make the appropriate changes such so that it returns a random color
-   color = color + Math.floor(Math.random()*16777215).toString(16);
-    //  color = color + Math.floor(Math.random()*5000000).toString(16);
+   //Typical way to select a a color with random number
+    //color = color + Math.floor(Math.random()*16777215).toString(16);
+   //USe a hex number to select the color
+    //color = color + Math.floor(Math.random()*0xFFFFFF).toString(16);
+   //QnD way to make sure that the color is visible. By limiting each hex color up to 0xAA
+   //we make sure that not much "white" element of colors is present, therefore darker colors will prevail
+    color = color + Math.floor(Math.random()*0xFFFFFF).toString(16);
+   //  color = color + Math.floor(Math.random()*5000000).toString(16);
    return color;
 }
 
