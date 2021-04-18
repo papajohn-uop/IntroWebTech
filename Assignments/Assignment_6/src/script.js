@@ -22,10 +22,11 @@ var game_area_div = document.querySelector("#gameArea")
 //show the first circle
 function newGame(){
   if (attempts==0)//So that pressing new game while already paying does nothing
-    appearAfterDelay();
+    {appearAfterDelay();
     //Reset time labels
     document.getElementById('timeTaken').innerHTML = 'ms'
     document.getElementById('totalTime').innerHTML = 'ms'
+    }
 }
 
 //επιστρέφει ένα τυχαίο χρώμα
@@ -132,7 +133,7 @@ function doSmth(e) {
   console.log("TOTAL TIME")
   console.log(totalTime)
   alert('TOTAL TIME--> ' + totalTime);
-  attempts=0
+  attempts=0 //So that a new game can start
   totalTime=0
  }
    else
