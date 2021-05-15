@@ -65,6 +65,7 @@
                 <!-- εμφανίζεται μόνο στο τέλος, και δείχνει τον αριθμό των προσπαθειών (totalTries) -->
                 <!-- this appears only at the end, and shows the amount of tries the player needed to finish the game (totalTries) -->
             </div>
+            <button type="button" onclick="loadImages()" >Καινούργιο παιχνίδι!</button> 
         </div>
     </body>
     <script>
@@ -78,6 +79,8 @@
         //A total of 12 cards, we shuffle them
         let cards = shuffleArr([0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5]);
         
+
+        const new_game_button = document.querySelector('button')
 
         //papajohn: select 6 random indexs for the images to download
         start_str="https://picsum.photos/id/"
@@ -101,6 +104,7 @@
         }
 
         function loadImages() {
+            new_game_button.disabled=true
             const promises = new Array()
 
             // ADD CODE HERE
@@ -257,6 +261,7 @@
                 // gameEndPanel.innerHTML = "<p>It took you " + totalTries + " to finish the game</p>"
                 gameEndPanel.style.zIndex = 3
                 gameEndPanel.style.opacity = 1
+                new_game_button.disabled=false
 
             }
         }
