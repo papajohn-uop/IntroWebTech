@@ -65,7 +65,7 @@
                 <!-- εμφανίζεται μόνο στο τέλος, και δείχνει τον αριθμό των προσπαθειών (totalTries) -->
                 <!-- this appears only at the end, and shows the amount of tries the player needed to finish the game (totalTries) -->
             </div>
-            <button type="button" onclick="loadImages()" >Καινούργιο παιχνίδι!</button> 
+         <!--   <button type="button" onclick="new_game()" >Καινούργιο παιχνίδι!</button> -->
         </div>
     </body>
     <script>
@@ -80,11 +80,9 @@
         let cards = shuffleArr([0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5]);
         
 
-        const new_game_button = document.querySelector('button')
+      //  const new_game_button = document.querySelector('button')
 
-        //papajohn: select 6 random indexs for the images to download
-        start_str="https://picsum.photos/id/"
-        end_str="/300/200"
+        //papajohn: select 6 distinct random indexs for the images to download
         var random_indexes = [];
         var images = []
         while(random_indexes.length < 6){
@@ -100,11 +98,20 @@
         console.log(random_indexes);
 
         function checkStatus(image,msg) {
-            console.log(msg,image)
+            if(msg=="OOPS")
+            {
+                console.log("Something went wrong in loading image:", image)
+            }
+            if(msg=="OK")
+            {
+                console.log("OK with image:", image)
+            }
         }
 
         function loadImages() {
-            new_game_button.disabled=true
+            console.log("Here!!")
+            //When the game starts disable button
+            //new_game_button.disabled=true
             const promises = new Array()
 
             // ADD CODE HERE
@@ -126,7 +133,7 @@
 
             //return the array that contains the promises
 
- 
+            //Just create promises for each image load and add to promises array
             images.forEach((image) => {
                 promises.push(new Promise((resolve, reject) => {
                     const img = new Image();
@@ -145,16 +152,17 @@
             return promises
         }
 
+        //Create a new element and add the corrsponding image
         function addImgToPanel(image_index)
         {
             var elem = document.createElement("img");
             img_panel=document.getElementsByClassName("images-panel")
             img_panel[0].appendChild(elem)
             elem.src = images[image_index];
-            console.log(elem)
         }
-            
-            function addCovers(image_index)
+        
+        //initial state: all images covered
+        function addCovers(image_index)
         {    
             let cover = document.createElement('div')
             cover.setAttribute("data-image-id", image_index)
@@ -165,15 +173,11 @@
 
         function promise_fullfilled(msg) {
             console.log("Promises fullfilled")
-          //  shuffled=shuffleArr(cards)
+            //Cards have been shuffled. 
             cards.forEach((image_index) => {
                 addImgToPanel(image_index)
                 addCovers(image_index)
-
-
-               
-
-            });      
+           });      
         }
 
 
@@ -217,34 +221,29 @@
                 previouslySelectedCover = selectedCover
                 selectedCover.style.opacity = 0;
                 totalTries++;
-                console.log("Play card1")
             }
             else //at least one card has been selected
             {
-                console.log("Play card2")
-                console.log(previouslySelectedCover)
-                console.log(selectedCover)
                 selectedCover.style.opacity = 0;
-                console.log(selectedCover.dataset.imageId)
-                console.log(previouslySelectedCover.dataset.imageId)
                 if(selectedCover.dataset.imageId==previouslySelectedCover.dataset.imageId)
                 {
                     console.log("You found a pair")
+                    //Reset the state so we can select a new first card
                     previouslySelectedCover=null
-                        selectedCover=null
-                        revealedPairs++
+                    selectedCover=null
+                    revealedPairs++
                 }
                 else
                 {
                     console.log("Nope. Try again")
-
+                    //Do housekeeping after 300ms
                     setTimeout(() => {  
+                        //Cover the selected images
                         selectedCover.style.opacity = 1;
                         previouslySelectedCover.style.opacity = 1; 
+                        //Reset the state so we can select a new first card
                         previouslySelectedCover=null
                         selectedCover=null}, 300);
-                        
-              
                 }
             }
 
@@ -261,7 +260,7 @@
                 // gameEndPanel.innerHTML = "<p>It took you " + totalTries + " to finish the game</p>"
                 gameEndPanel.style.zIndex = 3
                 gameEndPanel.style.opacity = 1
-                new_game_button.disabled=false
+                //new_game_button.disabled=false
 
             }
         }
@@ -275,6 +274,7 @@
             }
             return array;
         }
+        
 
     </script>
 
